@@ -5,7 +5,9 @@
  */
 
 #pragma once
-
+#ifndef SPDLOG_ENABLE_SYSLOG
+#define SPDLOG_ENABLE_SYSLOG
+#endif
 #ifndef FMT_HEADER_ONLY
 #define FMT_HEADER_ONLY
 #endif
@@ -881,7 +883,7 @@ auto setup_syslog_sink(const std::shared_ptr<cpptoml::table> &sink_table)
     const auto syslog_facility = value_from_table_or<int32_t>(
         sink_table, SYSLOG_FACILITY, DEFAULT_SYSLOG_FACILITY);
 
-    return make_shared<SyslogSink>(ident, syslog_option, syslog_facility);
+    return make_shared<SyslogSink>(ident, syslog_option, syslog_facility,true);
 }
 
 #endif
